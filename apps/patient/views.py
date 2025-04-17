@@ -8,7 +8,7 @@ from .forms import PacientForm
 class PatientCreateView(CreateView):
     model = ModelPacient
     form_class = PacientForm
-    template_name = 'patient/pacient_form.html'
+    template_name = 'patient/patient_form.html'
     success_url = reverse_lazy('patient_create')
     
     def get_context_data(self, **kwargs):
@@ -23,3 +23,18 @@ class PatientCreateView(CreateView):
         response = super().form_valid(form)
         messages.success(self.request, "Paciente cadastrado com sucesso!")
         return response
+    
+class PatientListView(ListView):
+    model = ModelPacient
+    template_name = 'patient/patient_list.html'
+    context_object_name = 'patients'
+    paginate_by = 10
+    ordering = ['name']
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['info'] = {
+            'title': 'Lista de pacientes',
+            'resume': 'Essa lista contém todos os pacientes cadastrados.'
+        }
+        return context

@@ -1,0 +1,51 @@
+{% extends 'material-ui/home-base.html' %}
+
+{% load static %}
+
+{% block main %}
+<div class="card p-4">
+    <div class="card">
+        <div class="table-responsive">
+          <table class="table align-items-center mb-0">
+            <thead>
+              <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Sexo</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Telefone</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Plano</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for patient in patients %}
+              <tr>
+                <td class="px-4">
+                    {{ patient.name }}
+                </td>
+                <td>
+                    <p class="text-xs font-weight-normal mb-0">{{ patient.gender }}</p>
+                </td>
+                <td>
+                    <p class="text-xs font-weight-normal mb-0">{{ patient.phone }}</p>
+                </td>
+                <td class="align-middle text-center">
+                  <div class="d-flex align-items-center">
+                    <span class="me-2 text-xs">Hapvida</span>
+                  </div>
+                </td>
+      
+                <td class="align-middle">
+                  <button class="btn btn-primary text-white mb-0">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        </div>
+      
+      
+</div>
+{% endblock %}
