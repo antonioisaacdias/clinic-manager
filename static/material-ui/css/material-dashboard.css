@@ -29149,3 +29149,17 @@ pre[class*=language-] {
     overflow: auto !important;
   }
 }
+
+.search-form-sm {
+  input{
+    margin: 0;
+    border-radius: 8px;
+    border: 1px solid var(--bs-gray-300);
+    padding: .3rem .5rem;
+    outline: 0;
+  }
+
+  button {
+    height: 100%;
+  }
+}

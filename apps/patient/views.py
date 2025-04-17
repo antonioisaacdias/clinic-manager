@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from .models import ModelPacient
 from .forms import PacientForm
+from django.db.models import Q
 
 class PatientCreateView(CreateView):
     model = ModelPacient
@@ -28,15 +29,22 @@ class PatientListView(ListView):
     model = ModelPacient
     template_name = 'patient/patient_list.html'
     context_object_name = 'patients'
-    paginate_by = 10
-    ordering = ['name']
-    
+    paginate_by = 12
+
+    def get_queryset(self):
+        queryset = super().get_queryset().order_by('name')
+        search = self.request.GET.get('q')
+        if search:
+            queryset = queryset.filter(Q(name__icontains=search))
+        return queryset
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['info'] = {
             'title': 'Lista de pacientes',
             'resume': 'Essa lista contém todos os pacientes cadastrados.'
         }
+        context['search_query'] = self.request.GET.get('q', '')
         return context
     
 class PatientUpdateView(UpdateView):
