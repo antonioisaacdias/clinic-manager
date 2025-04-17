@@ -38,3 +38,17 @@ class PatientListView(ListView):
             'resume': 'Essa lista contém todos os pacientes cadastrados.'
         }
         return context
+    
+class PatientUpdateView(UpdateView):
+    model = ModelPacient
+    form_class = PacientForm
+    template_name = 'patient/patient_form.html'
+    success_url = reverse_lazy('patient_create')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['info'] = {
+            'title': 'Edição de paciente',
+            'resume': 'Altere os dados do paciente para edita-lo no sistema.'
+        }
+        return context
