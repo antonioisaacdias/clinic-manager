@@ -1,0 +1,58 @@
+{% extends 'material-ui/home-base.html' %}
+
+{% load static %}
+
+{% block main %}
+<div class="card p-4">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="input-group input-group-static mb-4 row mx-1">
+            <label class="form-label">Nome completo</label>
+            {{form.name}}
+        </div>
+        <div class="row">
+            <div class="input-group input-group-outline mb-4 mb-4 col d-flex flex-column">
+                <label>Data de nascimento:</label>
+                {{form.birth_date}}
+            </div>
+            <div class="input-group input-group-outline mb-4 mb-4 col d-flex flex-column">
+                <label>Sexo:</label>
+                {{form.gender}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-group input-group-outline mb-4 mb-4 col d-flex flex-column">
+                <label>Número do plano:</label>
+                {{form.plan_card}}
+            </div>
+            <div class="input-group input-group-outline mb-4 mb-4 col d-flex flex-column">
+                <label>Telefone:</label>
+                {{form.phone}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-group input-group-outline mb-4">
+                <label class="form-label">Nome do responsável</label>
+                {{form.guardian_name}}
+            </div>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible text-white fade show d-flex align-items-center" role="alert">
+                    <span class="alert-icon me-2">
+                        <i class="fa-solid fa-thumbs-up fs-5"></i>
+                    </span>
+                    <span class="alert-text flex-grow-1">{{ message }}</span>
+                    <button type="button" class="btn-close py-0 px-4" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" style="font-size: 2rem;">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <footer class="d-flex justify-content-end">
+            <button class="btn btn-primary fw-bold" type="submit">Cadastrar</button>
+        </footer>
+    </form>
+</div>
+{% endblock %}
