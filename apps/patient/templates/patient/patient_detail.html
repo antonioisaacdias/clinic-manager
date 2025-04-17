@@ -1,0 +1,48 @@
+{% extends 'material-ui/home-base.html' %}
+
+{% load static %}
+
+{% block main %}
+<div class="card p-4">
+    <div id="modal-container"></div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible text-white fade show d-flex align-items-center" role="alert">
+                <span class="alert-icon me-2">
+                    <i class="fa-solid fa-thumbs-up fs-5"></i>
+                </span>
+                <span class="alert-text flex-grow-1">{{ message }}</span>
+                <button type="button" class="btn-close py-0 px-4" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true" style="font-size: 2rem;">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="d-flex align-items-center justify-content-between flex-nowrap mb-3">
+        <h3 class="mb-0 flex-grow-1">{{ patient.name }}</h3>
+        <div class="ms-3 d-flex gap-2">
+            <a 
+                hx-get="{% url 'patient_delete' patient.id %}" 
+                hx-target="#modal-container" 
+                hx-swap="innerHTML"
+                class="btn btn-danger text-white mb-0"
+            >
+                <i class="fa-solid fa-trash"></i>
+            </a>
+            <a class="btn btn-success text-white mb-0" href="{% url 'patient_update' patient.id %}">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="row my-2 pt-3 border-top border-1">
+        <div class="col"><strong>Data de nascimento:</strong> {{patient.birth_date}}</div>
+        <div class="col"><strong>Sexo:</strong> {{patient.gender}}</div>
+    </div>
+    <div class="row my-2">
+        <div class="col"><strong>Número do plano:</strong> {{patient.plan_card}}</div>
+        <div class="col"><strong>Sexo:</strong> {{patient.phone}}</div>
+    </div>
+    <div class="my-2"><strong>Nome do responsável:</strong> {{patient.guardian_name}}</div>
+</div>
+{% endblock %}

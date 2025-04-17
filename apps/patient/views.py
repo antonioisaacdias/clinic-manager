@@ -1,4 +1,4 @@
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.contrib import messages
@@ -43,7 +43,11 @@ class PatientUpdateView(UpdateView):
     model = ModelPacient
     form_class = PacientForm
     template_name = 'patient/patient_form.html'
-    success_url = reverse_lazy('patient_create')
+
+    
+    def get_success_url(self):
+        messages.success(self.request, "Paciente editado com sucesso!")
+        return reverse_lazy('patient_detail', kwargs={'pk': self.object.id})
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -52,3 +56,25 @@ class PatientUpdateView(UpdateView):
             'resume': 'Altere os dados do paciente para edita-lo no sistema.'
         }
         return context
+    
+class PatientDetailView(DetailView):
+    model = ModelPacient
+    template_name = 'patient/patient_detail.html'
+    context_object_name = 'patient'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['info'] = {
+            'title': 'Dados do paciente',
+            'resume': 'Abaixo estão os dados registrados do paciente no banco de dados.'
+        }
+        return context
+    
+class PatientDeleteView(DeleteView):
+    model = ModelPacient
+    template_name = 'material-ui/partials/modal-delete.html'
+    context_object_name = 'patient'
+    
+    def get_success_url(self):
+        messages.success(self.request, "Paciente excluído com sucesso!")
+        return reverse_lazy('patient_list')
