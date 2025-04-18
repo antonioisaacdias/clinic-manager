@@ -37,6 +37,14 @@ class SpecialtyListView(ListView):
         search = self.request.GET.get('q')
         if search:
             queryset = queryset.filter(Q(name__icontains=search))
+
+    
+        situacao = self.request.GET.get('is_active')
+        if situacao == 'True':
+            queryset = queryset.filter(is_active=True)
+        elif situacao == 'False':
+            queryset = queryset.filter(is_active=False)
+            
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -46,6 +54,7 @@ class SpecialtyListView(ListView):
             'resume': 'Essa lista contém todos as expecialidades cadastradas.'
         }
         context['search_query'] = self.request.GET.get('q', '')
+        context['is_active'] = self.request.GET.get('is_active', '')
         return context
 
 class SpecialtyDetailView(DetailView):
