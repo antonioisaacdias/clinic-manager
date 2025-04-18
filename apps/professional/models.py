@@ -5,9 +5,8 @@ from django.contrib.auth.models import User
 class ModelSpecialty(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     name = models.CharField(max_length=100, unique=True)
+    is_active = models.BooleanField(default=True)
 
-    def __str__(self):
-        return self.name
 
 class ModelProfessional(models.Model):
     GENDER_CHOICES = [
@@ -28,6 +27,7 @@ class ModelProfessional(models.Model):
     specialties = models.ManyToManyField(ModelSpecialty, related_name='professionals')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='professional_profile')
     
     def get_gender_display_label(self):
