@@ -86,3 +86,4 @@ class PatientDeleteView(DeleteView):
     def get_success_url(self):
         messages.success(self.request, "Paciente excluído com sucesso!")
         return reverse_lazy('patient_list')
+    
