@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
 from .models import ModelSpecialty, ModelProfessional
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
@@ -77,3 +78,9 @@ class SpecialtyUpdateView(UpdateView):
             'resume': 'Altere os dados da especialidade para edita-la no sistema.'
         }
         return context
+
+def change_specialty_activity_view(request, pk):
+    specialty = get_object_or_404(ModelSpecialty, id=pk)
+    specialty.is_active = not specialty.is_active
+    specialty.save()
+    return HttpResponse(status=204) 
