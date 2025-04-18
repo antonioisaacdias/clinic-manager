@@ -5,34 +5,64 @@
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2  bg-white my-2" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand px-4 py-3 m-0" href="" target="_blank">
-        <img src="{% static 'core/imgs/logo.png' %}" class="navbar-brand-img" height="40" alt="main_logo">
-        <span class="ms-1 text-sm text-dark">Instituto Saarang</span>
+      <a class="navbar-brand px-4 py-3 m-0 d-flex align-items-center justify-content-center" href="" target="_blank">
+        <img src="{% static 'core/imgs/logo-dark.png' %}" class="navbar-brand-img" height="50" alt="main_logo">
       </a>
     </div>
     <hr class="horizontal dark mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a data-bs-toggle="collapse" href="#submenuExample" class="nav-link text-dark" aria-controls="submenuExample" role="button" aria-expanded="false">
+          <a data-bs-toggle="collapse" href="#submenuPacientes" class="nav-link text-dark" aria-controls="submenuPacientes" role="button" aria-expanded="false">
             <i class="fa-solid fa-child-reaching"></i>
             <span class="nav-link-text ms-1">Pacientes</span>
           </a>
-          <div class="collapse" id="submenuExample">
+          <div class="collapse" id="submenuPacientes">
             <ul class="nav ms-4">
               <li class="nav-item">
-                <a class="nav-link text-dark" href="{% url 'patient_create' %}">
-                  Cadastrar novo paciente
-                </a>
+                <a class="nav-link text-dark" href="{% url 'patient_create' %}">Cadastrar novo paciente</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-dark" href="{% url 'patient_list' %}">
-                  Listar pacientes
-                </a>
+                <a class="nav-link text-dark" href="{% url 'patient_list' %}">Listar pacientes</a>
               </li>
             </ul>
           </div>
         </li>
+        
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="#submenuProfissionais" class="nav-link text-dark" aria-controls="submenuProfissionais" role="button" aria-expanded="false">
+            <i class="fa-solid fa-user-doctor"></i>
+            <span class="nav-link-text ms-1">Profissionais</span>
+          </a>
+          <div class="collapse" id="submenuProfissionais">
+            <ul class="nav ms-4">
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="#">Cadastrar profissional</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="#">Listar profissionais</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="#submenuPlanos" class="nav-link text-dark" aria-controls="submenuPlanos" role="button" aria-expanded="false">
+            <i class="fa-solid fa-id-card"></i>
+            <span class="nav-link-text ms-1">Planos</span>
+          </a>
+          <div class="collapse" id="submenuPlanos">
+            <ul class="nav ms-4">
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="#">Cadastrar plano</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="#">Listar planos</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        
       </ul>
     </div>
   </aside>
