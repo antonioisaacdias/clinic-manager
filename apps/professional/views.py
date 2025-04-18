@@ -47,3 +47,33 @@ class SpecialtyListView(ListView):
         context['search_query'] = self.request.GET.get('q', '')
         return context
 
+class SpecialtyDetailView(DetailView):
+    model = ModelSpecialty
+    template_name = 'specialty/specialty_detail.html'
+    context_object_name = 'specialty'  
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['info'] = {
+            'title': 'Dados da especialidade',
+            'resume': 'Abaixo estão os dados registrados da especialidade no banco de dados.'
+        }
+        return context
+
+class SpecialtyUpdateView(UpdateView):
+    model = ModelSpecialty
+    form_class = SpecialtyForm
+    template_name = 'specialty/specialty_form.html'
+
+    
+    def get_success_url(self):
+        messages.success(self.request, "Especialidade editada com sucesso!")
+        return reverse_lazy('specialty_detail', kwargs={'pk': self.object.id})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['info'] = {
+            'title': 'Edição de especialidade',
+            'resume': 'Altere os dados da especialidade para edita-la no sistema.'
+        }
+        return context
