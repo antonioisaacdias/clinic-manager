@@ -80,7 +80,7 @@ class PatientDetailView(DetailView):
     
 class PatientDeleteView(DeleteView):
     model = ModelPacient
-    template_name = 'material-ui/partials/modal-delete.html'
+    template_name = 'material-ui/partials/patient-modal-delete.html'
     context_object_name = 'patient'
     
     def get_success_url(self):

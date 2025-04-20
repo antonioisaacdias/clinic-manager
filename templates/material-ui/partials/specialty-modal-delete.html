@@ -1,14 +1,14 @@
-<div class="modal fade show" id="modal-delete" tabindex="-1" style="display:block;" aria-modal="true" role="dialog">
+<div class="modal fade show" id="specialty-modal-delete" tabindex="-1" style="display:block;" aria-modal="true" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form method="post" action="{% url 'patient_delete' patient.id %}">
+        <form method="post" action="{% url 'specialty_delete' specialty.id %}">
           {% csrf_token %}
           <div class="modal-header">
-            <h5 class="modal-title">Excluir paciente</h5>
+            <h5 class="modal-title">Excluir especialidade</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
           </div>
           <div class="modal-body">
-            Tem certeza que deseja excluir <strong>{{ patient.name }}</strong>?
+            Tem certeza que deseja excluir <strong>{{ specialty.name }}</strong>?
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -20,6 +20,6 @@
   </div>
   
   <script>
-    var myModal = new bootstrap.Modal(document.getElementById('modal-delete'))
+    var myModal = new bootstrap.Modal(document.getElementById('specialty-modal-delete'))
     myModal.show()
   </script>

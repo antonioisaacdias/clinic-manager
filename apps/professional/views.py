@@ -88,6 +88,15 @@ class SpecialtyUpdateView(UpdateView):
         }
         return context
 
+class specialtyDeleteView(DeleteView):
+    model = ModelSpecialty
+    template_name = 'material-ui/partials/specialty-modal-delete.html'
+    context_object_name = 'specialty'
+    
+    def get_success_url(self):
+        messages.success(self.request, "Especialidade excluída com sucesso!")
+        return reverse_lazy('specialty_list')
+
 def change_specialty_activity_view(request, pk):
     specialty = get_object_or_404(ModelSpecialty, id=pk)
     specialty.is_active = not specialty.is_active
