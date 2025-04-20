@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import ModelSpecialty, ModelProfessional
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
-from .forms import SpecialtyForm
+from .forms import SpecialtyForm, ProfessionalForm
 from django.db.models import Q
 from django.contrib import messages
 
@@ -102,3 +102,54 @@ def change_specialty_activity_view(request, pk):
     specialty.is_active = not specialty.is_active
     specialty.save()
     return HttpResponse(status=204) 
+
+class ProfessionalListView(ListView):
+    model = ModelProfessional
+    template_name = 'professional/professional_list.html'
+    context_object_name = 'professionals'
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super().get_queryset().order_by('name')
+        search = self.request.GET.get('q')
+        if search:
+            queryset = queryset.filter(Q(name__icontains=search))
+
+    
+        situacao = self.request.GET.get('is_active')
+        if situacao == 'True':
+            queryset = queryset.filter(is_active=True)
+        elif situacao == 'False':
+            queryset = queryset.filter(is_active=False)
+            
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['info'] = {
+            'title': 'Lista de profissionais',
+            'resume': 'Essa lista contém todos os profissionais cadastrados.'
+        }
+        context['search_query'] = self.request.GET.get('q', '')
+        context['is_active'] = self.request.GET.get('is_active', '')
+        return context
+
+class ProfessionalCreateView(CreateView):
+    model = ModelProfessional
+    form_class = ProfessionalForm
+    template_name = 'professional/professional_form.html'
+    success_url = reverse_lazy('professional_create')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['info'] = {
+            'title': 'Cadastro de profissional',
+            'resume': 'Preencha os dados do profissional para cadastra-lo.'
+        }
+        return context
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, "Profissional cadastrado com sucesso!")
+        return response
+

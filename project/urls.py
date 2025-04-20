@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('apps.core.urls')),
     path('patients/', include('apps.patient.urls')),
     path('professionals/', include('apps.professional.urls')),
+    path('select2/', include('django_select2.urls')),
 ]

@@ -1,0 +1,25 @@
+<div class="modal fade show" id="professional-modal-delete" tabindex="-1" style="display:block;" aria-modal="true" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form method="post" action="{% url 'professional_delete' professional.id %}">
+          {% csrf_token %}
+          <div class="modal-header">
+            <h5 class="modal-title">Excluir profissional</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body">
+            Tem certeza que deseja excluir <strong>{{ professional.name }}</strong>?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-danger">Confirmar exclusão</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    var myModal = new bootstrap.Modal(document.getElementById('professional-modal-delete'))
+    myModal.show()
+  </script>

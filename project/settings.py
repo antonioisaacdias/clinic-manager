@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.patient',
     'apps.professional',
     'fontawesomefree',
+    'django_select2',
 ]
 
 MIDDLEWARE = [
