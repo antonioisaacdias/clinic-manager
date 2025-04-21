@@ -47,7 +47,7 @@
     <table class="table align-items-center mb-0">
       <thead>
         <tr>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center"></th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Avatar</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Nome</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Especialidades</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Telefone</th>
@@ -82,7 +82,7 @@
             <p class="text-xs font-weight-normal mb-0 text-center">{{ professional.phone }}</p>
           </td>
           <td class="align-middle text-center">
-            <a class="btn btn-info text-white mb-0" href="">
+            <a class="btn btn-info text-white mb-0" href="{% url 'professional_detail' professional.id %}">
               <i class="fa-solid fa-eye"></i>
             </a>
           </td>

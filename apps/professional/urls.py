@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import SpecialtyListView, SpecialtyCreateView, SpecialtyDetailView, SpecialtyUpdateView, change_specialty_activity_view, specialtyDeleteView, ProfessionalListView, ProfessionalCreateView
+from .views import SpecialtyListView, SpecialtyCreateView, SpecialtyDetailView, SpecialtyUpdateView, change_specialty_activity_view, specialtyDeleteView, ProfessionalListView, ProfessionalCreateView, ProfessionalDetailView, change_professional_activity_view
 
 
 
@@ -13,4 +13,6 @@ urlpatterns = [
     
     path('', ProfessionalListView.as_view(), name='professional_list'),
     path('create/', ProfessionalCreateView.as_view(), name='professional_create'),
+    path('/<uuid:pk>/active/', change_professional_activity_view, name='professional_active'),
+    path('/<uuid:pk>/', ProfessionalDetailView.as_view(), name='professional_detail'),
 ]

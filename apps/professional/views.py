@@ -152,3 +152,22 @@ class ProfessionalCreateView(CreateView):
         response = super().form_valid(form)
         messages.success(self.request, "Profissional cadastrado com sucesso!")
         return response
+    
+class ProfessionalDetailView(DeleteView):
+    model = ModelProfessional
+    template_name = 'professional/professional_detail.html'
+    context_object_name = 'professional'  
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['info'] = {
+            'title': 'Dados do profissional',
+            'resume': 'Abaixo estão os dados registrados do profissional no banco de dados.'
+        }
+        return context
+
+def change_professional_activity_view(request, pk):
+    professional = get_object_or_404(ModelProfessional, id=pk)
+    professional.is_active = not professional.is_active
+    professional.save()
+    return HttpResponse(status=204) 
