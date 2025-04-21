@@ -180,3 +180,21 @@ class ProfessionalDeleteView(DeleteView):
     def get_success_url(self):
         messages.success(self.request, "Profissional excluído com sucesso!")
         return reverse_lazy('professional_list')
+    
+class ProfessionalUpdateView(UpdateView):
+    model = ModelProfessional
+    form_class = ProfessionalForm
+    template_name = 'professional/professional_form.html'
+
+    
+    def get_success_url(self):
+        messages.success(self.request, "Profissional editado com sucesso!")
+        return reverse_lazy('professional_detail', kwargs={'pk': self.object.id})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['info'] = {
+            'title': 'Edição de profissional',
+            'resume': 'Altere os dados do profissional para edita-los no sistema.'
+        }
+        return context
