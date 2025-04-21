@@ -58,9 +58,22 @@
                 {{form.phone}}
             </div>
         </div>
-        <div class=" mb-4">
-            <label >Especialidades:</label>
-            {{form.specialties}}
+        <div class="row mb-4 mx-1">
+            <div class="col">
+                <label class="form-label">Especialidades:</label>
+                <div class="row border rounded p-3">
+                    {% for checkbox in form.specialties %}
+                      <div class="col-md-6 mb-2">
+                        <div class="form-check">
+                          {{ checkbox.tag }}
+                          <label class="form-check-label" for="{{ checkbox.id_for_label }}">
+                            {{ checkbox.choice_label }}
+                          </label>
+                        </div>
+                      </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="input-group input-group-outline mb-4">
@@ -73,7 +86,9 @@
             <button class="btn btn-primary fw-bold" type="submit">Cadastrar</button>
         </footer>
 
-        {{ form.media }}
+
     </form>
 </div>
+
+{{ form.media }}
 {% endblock %}

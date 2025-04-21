@@ -152,4 +152,3 @@ class ProfessionalCreateView(CreateView):
         response = super().form_valid(form)
         messages.success(self.request, "Profissional cadastrado com sucesso!")
         return response
-
