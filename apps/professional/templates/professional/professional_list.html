@@ -55,12 +55,46 @@
         </tr>
       </thead>
       <tbody>
+        {% for professional in professionals %}
+        <tr>
+          <td class="px-4 text-center">
+            {% if professional.gender == 'M' %}
+              <img src="{% static 'core/imgs/he-doctor.png' %}" alt="" width="80px">
+            {% elif professional.gender == 'F' %}
+              <img src="{% static 'core/imgs/she-doctor.png' %}" alt="" width="80px">
+            {% else %}
+              <img src="{% static 'core/imgs/doctor.png' %}" alt="" width="80px">
+            {% endif %}
+          </td>          
+          <td>
+            <p class="text-xs mb-0 text-center ">{{ professional.name }}</p>
+          </td>
+          <td>
+            <div class="text-xs text-center d-flex flex-wrap justify-content-center gap-1">
+              {% for specialty in professional.specialties.all %}
+                <span class="badge bg-secondary">{{ specialty.name }}</span>
+              {% empty %}
+                <span class="text-muted">Nenhuma</span>
+              {% endfor %}
+            </div>
+          </td>
+          <td class="align-middle text-center">
+            <p class="text-xs font-weight-normal mb-0 text-center">{{ professional.phone }}</p>
+          </td>
+          <td class="align-middle text-center">
+            <a class="btn btn-info text-white mb-0" href="">
+              <i class="fa-solid fa-eye"></i>
+            </a>
+          </td>
+        </tr>
+        {% empty %}
         <tr>
           <td colspan="5" class="text-center text-muted py-4">
             <img src="{% static 'core/imgs/kids-with-ball.png' %}" alt="" width="300px">
             <p class='h4 text-secondary mt-4'>Nenhum profissional encontrado.</p>
           </td>
         </tr>
+        {% endfor %}
       </tbody>
     </table>
 
