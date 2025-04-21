@@ -88,7 +88,7 @@ class SpecialtyUpdateView(UpdateView):
         }
         return context
 
-class specialtyDeleteView(DeleteView):
+class SpecialtyDeleteView(DeleteView):
     model = ModelSpecialty
     template_name = 'material-ui/partials/specialty-modal-delete.html'
     context_object_name = 'specialty'
@@ -171,3 +171,12 @@ def change_professional_activity_view(request, pk):
     professional.is_active = not professional.is_active
     professional.save()
     return HttpResponse(status=204) 
+
+class ProfessionalDeleteView(DeleteView):
+    model = ModelProfessional
+    template_name = 'material-ui/partials/professional-modal-delete.html'
+    context_object_name = 'professional'
+    
+    def get_success_url(self):
+        messages.success(self.request, "Profissional excluído com sucesso!")
+        return reverse_lazy('professional_list')

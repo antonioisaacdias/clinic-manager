@@ -33,7 +33,7 @@
                 >
             </div>
             <a 
-                hx-get="" 
+                hx-get="{% url 'professional_delete' professional.id %}" 
                 hx-target="#modal-container" 
                 hx-swap="innerHTML"
                 class="btn btn-danger text-white mb-0"
