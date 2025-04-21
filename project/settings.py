@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'apps.core',
     'apps.patient',
     'apps.professional',
+    'apps.appointment',
     'fontawesomefree',
 
 ]

@@ -13,6 +13,12 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
+          <a href="{% url 'appointment_today' %}" class="nav-link text-dark" >
+            <i class="fa-regular fa-calendar"></i>
+            <span class="nav-link-text ms-1">Agendamentos</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a data-bs-toggle="collapse" href="#submenuPacientes" class="nav-link text-dark" aria-controls="submenuPacientes" role="button" aria-expanded="false">
             <i class="fa-solid fa-child-reaching"></i>
             <span class="nav-link-text ms-1">Pacientes</span>
