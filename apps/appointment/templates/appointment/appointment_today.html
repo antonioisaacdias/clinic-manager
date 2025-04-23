@@ -4,27 +4,6 @@
 
 {% block main %}
 <div class="card p-4">
-    <div id="calendar"></div>
-</div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var calendarEl = document.getElementById('calendar');
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'timeGridWeek',
-        locale: 'pt-br',
-        height: 'auto',
-        slotMinTime: '08:00:00',
-        slotMaxTime: '18:00:00',
-        allDaySlot: false,
-        headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'timeGridWeek,timeGridDay'
-        },
-        events: '{% url "calendar_events" %}'  // sua URL que retorna eventos em JSON
-      });
-      calendar.render();
-    });
-</script>
+</div>
 {% endblock %}
