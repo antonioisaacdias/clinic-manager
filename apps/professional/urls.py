@@ -13,8 +13,8 @@ urlpatterns = [
     
     path('', ProfessionalListView.as_view(), name='professional_list'),
     path('create/', ProfessionalCreateView.as_view(), name='professional_create'),
-    path('/<uuid:pk>/active/', change_professional_activity_view, name='professional_active'),
-    path('/<uuid:pk>/', ProfessionalDetailView.as_view(), name='professional_detail'),
+    path('<uuid:pk>/active/', change_professional_activity_view, name='professional_active'),
+    path('<uuid:pk>/', ProfessionalDetailView.as_view(), name='professional_detail'),
     path('<uuid:pk>/delete/', ProfessionalDeleteView.as_view(), name='professional_delete'),
     path('<uuid:pk>/update/', ProfessionalUpdateView.as_view(), name='professional_update'),
 ]
