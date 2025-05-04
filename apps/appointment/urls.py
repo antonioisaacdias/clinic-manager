@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import today_appointments_view, calendar_events
+from .views import ModelAppointmentListView, ModelAppointmentUpdateView
 
 urlpatterns = [
-    path('', today_appointments_view, name='appointment_today'),
-    path('api/appointments/', calendar_events, name='calendar_events'),
+    path('', ModelAppointmentListView.as_view(), name='appointment_today'),
+    path('<uuid:pk>/update/', ModelAppointmentUpdateView.as_view(), name='appointment_update'),
     
 ]

@@ -11,7 +11,7 @@
         <div class="input-group input-group-outline d-flex align-items-center justify-content-center gap-1" style="max-width: 180px;">
           <label for="is_active" class="mb-0 me-2 fw-bold">Situação:</label>
           <select name="is_active" id="situacao" class="form-control bg-white">
-            <option value="" {% if is_active == "" %}selected{% endif %}>Todas</option>
+            <option value="all" {% if is_active == "" %}selected{% endif %}>Todas</option>
             <option value="True" {% if is_active == "True" %}selected{% endif %}>Ativas</option>
             <option value="False" {% if is_active == "False" %}selected{% endif %}>Inativas</option>
           </select>

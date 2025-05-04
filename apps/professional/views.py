@@ -40,7 +40,7 @@ class SpecialtyListView(ListView):
 
     
         situacao = self.request.GET.get('is_active')
-        if situacao == 'True':
+        if situacao == 'True' or situacao is None:
             queryset = queryset.filter(is_active=True)
         elif situacao == 'False':
             queryset = queryset.filter(is_active=False)
@@ -54,7 +54,7 @@ class SpecialtyListView(ListView):
             'resume': 'Essa lista contém todos as expecialidades cadastradas.'
         }
         context['search_query'] = self.request.GET.get('q', '')
-        context['is_active'] = self.request.GET.get('is_active', '')
+        context['is_active'] = self.request.GET.get('is_active', 'True')
         return context
 
 class SpecialtyDetailView(DetailView):
@@ -117,8 +117,9 @@ class ProfessionalListView(ListView):
 
     
         situacao = self.request.GET.get('is_active')
-        if situacao == 'True':
+        if situacao is None or situacao == 'True':
             queryset = queryset.filter(is_active=True)
+            
         elif situacao == 'False':
             queryset = queryset.filter(is_active=False)
             
@@ -131,7 +132,7 @@ class ProfessionalListView(ListView):
             'resume': 'Essa lista contém todos os profissionais cadastrados.'
         }
         context['search_query'] = self.request.GET.get('q', '')
-        context['is_active'] = self.request.GET.get('is_active', '')
+        context['is_active'] = self.request.GET.get('is_active', 'True')
         return context
 
 class ProfessionalCreateView(CreateView):
