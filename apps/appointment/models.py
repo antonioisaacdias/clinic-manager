@@ -2,9 +2,6 @@ from django.db import models
 from apps.professional.models import ModelProfessional, ModelSpecialty
 from apps.patient.models import ModelPacient
 from uuid import uuid4
-from datetime import datetime, timedelta
-from calendar import monthrange
-from django.utils.timezone import make_aware
 
 
 class ModelSchedule(models.Model):
