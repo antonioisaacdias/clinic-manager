@@ -3,9 +3,10 @@ from django.http import HttpResponse
 from .models import ModelSpecialty, ModelProfessional
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
-from .forms import SpecialtyForm, ProfessionalForm
 from django.db.models import Q
 from django.contrib import messages
+from .forms import SpecialtyForm, ProfessionalForm
+
 
 class SpecialtyCreateView(CreateView):
     model = ModelSpecialty
