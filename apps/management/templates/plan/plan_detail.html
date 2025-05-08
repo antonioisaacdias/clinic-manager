@@ -1,0 +1,65 @@
+{% extends 'material-ui/home-base.html' %}
+
+{% load static %}
+
+{% block main %}
+<div class="card p-4">
+    <div id="modal-container"></div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible text-white fade show d-flex align-items-center" role="alert">
+                <span class="alert-icon me-2">
+                    <i class="fa-solid fa-thumbs-up fs-5"></i>
+                </span>
+                <span class="alert-text flex-grow-1">{{ message }}</span>
+                <button type="button" class="btn-close py-0 px-4" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true" style="font-size: 2rem;">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="d-flex align-items-center justify-content-between flex-nowrap mb-3">
+        <h3 class="mb-0 flex-grow-1">{{ plan.name }}</h3>
+        <div class="ms-3 d-flex gap-2">
+            <div class="form-check form-switch d-flex align-items-center gap-2 px-3 border rounded m-0">
+                <label class="form-check-label mb-0 me-4 pe-3" for="is-active">Ativo:</label>
+                <input 
+                    class="form-check-input" 
+                    type="checkbox" id="is-active" 
+                    {% if plan.is_active %}checked{% endif %}
+                    hx-post="{% url 'plan_active' plan.id %}"
+                    hx-swap="none"
+                    hx-trigger="change"
+                >
+            </div>
+            <a 
+                hx-get="{% url 'plan_delete' plan.id %}" 
+                hx-target="#modal-container" 
+                hx-swap="innerHTML"
+                class="btn btn-danger text-white mb-0"
+            >
+                <i class="fa-solid fa-trash"></i>
+            </a>
+            <a class="btn btn-success text-white mb-0" href="{% url 'plan_update' plan.id %}">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col my-2"><strong>Cadastrado em:</strong> {{plan.created_at}}</div>
+        <div class="col my-2"><strong>Modificado em:</strong> {{plan.updated_at}}</div>
+    </div>
+    <div class="row d-flex align-items-center justify-content-center p-2"> 
+        
+    </div>
+
+    <div class="input-group input-group-outline mb-4 mb-4 d-flex ">
+        <textarea class="form-control" rows="20" disabled>{{ plan.description }}</textarea>
+    </div>
+
+    <footer class="d-flex align-items-center justify-content-end">
+        <a class="btn btn-secondary fw-bold" href="{% url 'plan_list' %}">Voltar</a>
+    </footer>
+</div>
+{% endblock %}
