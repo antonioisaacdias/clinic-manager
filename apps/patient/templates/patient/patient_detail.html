@@ -40,10 +40,15 @@
         <div class="col"><strong>Sexo:</strong> {{ patient.get_gender_display_label }}</div>
     </div>
     <div class="row my-2">
+        <div class="col"><strong>Plano:</strong> {{patient.plan}}</div>
         <div class="col"><strong>Número do plano:</strong> {{patient.plan_card}}</div>
-        <div class="col"><strong>Telefone:</strong> {{patient.phone}}</div>
     </div>
+    <div class="col"><strong>Telefone:</strong> {{patient.phone}}</div>
     <div class="my-2"><strong>Nome do responsável:</strong> {{patient.guardian_name}}</div>
+    <div class="row">
+        <div class="col my-2"><strong>Cadastrado em:</strong> {{patient.created_at}}</div>
+        <div class="col my-2"><strong>Modificado em:</strong> {{patient.updated_at}}</div>
+    </div>
     <footer class="d-flex align-items-center justify-content-end">
         <a class="btn btn-secondary fw-bold" href="{% url 'patient_list' %}">Voltar</a>
     </footer>

@@ -68,12 +68,6 @@ class ModelPlanDetailView(DetailView):
             'resume': 'Abaixo estão os dados registrados do convênio no banco de dados.'
         }
         return context
-    
-def change_plan_activity_view(request, pk):
-    plan = get_object_or_404(ModelPlan, pk=pk)
-    plan.is_active = not plan.is_active
-    plan.save()
-    return HttpResponse(status=204) 
 
 class ModelPlanDeleteView(DeleteView):
     model = ModelPlan
@@ -90,8 +84,6 @@ class ModelPlanUpdateView(UpdateView):
     form_class = PlanForm
     template_name = 'plan/plan_form.html'
 
-
-    
     def get_success_url(self):
         messages.success(self.request, "Convênio editado com sucesso!")
         return reverse_lazy('plan_detail', kwargs={'pk': self.object.id})
@@ -103,3 +95,9 @@ class ModelPlanUpdateView(UpdateView):
             'resume': 'Altere os dados do convênio para edita-lo no sistema.'
         }
         return context
+    
+def change_plan_activity_view(request, pk):
+    plan = get_object_or_404(ModelPlan, pk=pk)
+    plan.is_active = not plan.is_active
+    plan.save()
+    return HttpResponse(status=204) 
