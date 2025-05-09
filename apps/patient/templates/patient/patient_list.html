@@ -58,7 +58,13 @@
           </td>
           <td class="align-middle text-center">
             <div class="d-flex align-items-center justify-content-center">
-              <span class="me-2 text-xs">{{patient.plan}}</span>
+              <span class="me-2 text-xs">
+                {% if patient.plan %} 
+                    {{ patient.plan }}
+                {% else %}
+                    Não informado
+                {% endif %}
+              </span>
             </div>
           </td>
           <td class="align-middle text-center">

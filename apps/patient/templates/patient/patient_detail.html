@@ -40,8 +40,16 @@
         <div class="col"><strong>Sexo:</strong> {{ patient.get_gender_display_label }}</div>
     </div>
     <div class="row my-2">
-        <div class="col"><strong>Plano:</strong> {{patient.plan}}</div>
-        <div class="col"><strong>Número do plano:</strong> {{patient.plan_card}}</div>
+        <div class="col"><strong>Plano:</strong> 
+            {% if patient.plan %} 
+                {{ patient.plan }}
+            {% else %}
+                Não informado
+            {% endif %}
+        </div>
+        <div class="col"><strong>Número do plano:</strong>
+             {{patient.plan_card}}
+        </div>
     </div>
     <div class="col"><strong>Telefone:</strong> {{patient.phone}}</div>
     <div class="my-2"><strong>Nome do responsável:</strong> {{patient.guardian_name}}</div>
