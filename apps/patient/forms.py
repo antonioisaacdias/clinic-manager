@@ -2,6 +2,7 @@ from django import forms
 from .models import ModelPacient
 
 
+
 class PacientForm(forms.ModelForm):
     class Meta:
         model = ModelPacient
@@ -35,4 +36,9 @@ class PacientForm(forms.ModelForm):
         help_texts = {
             'plan_card': 'Número da carteira do plano de saúde',
         }
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        from apps.management.models import ModelPlan  
+        self.fields['plan'].queryset = ModelPlan.objects.filter(is_active=True)
         
