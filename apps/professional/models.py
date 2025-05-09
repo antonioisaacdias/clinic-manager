@@ -32,7 +32,7 @@ class ModelProfessional(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='professional_profile')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='professional_profile', null=True, blank=True)
     
     def get_gender_display_label(self):
         return dict(self.GENDER_CHOICES).get(self.gender, 'Desconhecido')
