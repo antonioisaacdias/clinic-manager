@@ -1,0 +1,28 @@
+{% extends 'material-ui/home-base.html' %}
+{% load static %}
+
+{% block main %}
+<div class="card p-4">
+    <div class="schedules d-flex gap-4 flex-wrap justify-content-center">
+        {% for professional in professionals %}
+            <div class="card mb-2 d-flex flex-column align-items-center justify-content-center gap-2 p-4 cursor-pointer hover-effect" style="width: 200px;">
+                {% if professional.gender == 'M' %}
+                <img src="{% static 'core/imgs/he-doctor.png' %}" alt="" width="80px">
+                {% elif professional.gender == 'F' %}
+                <img src="{% static 'core/imgs/she-doctor.png' %}" alt="" width="80px">
+                {% else %}
+                <img src="{% static 'core/imgs/doctor.png' %}" alt="" width="80px">
+                {% endif %}
+                <h5 class="text-center">{{professional.name}}</h5>
+                <div class="text-xs text-center d-flex flex-wrap justify-content-center gap-1">
+                {% for specialty in professional.specialties.all %}
+                    <span class="badge bg-secondary">{{ specialty.name }}</span>
+                {% empty %}
+                    <span class="text-muted">Nenhuma</span>
+                {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -29175,3 +29175,15 @@ pre[class*=language-] {
   color: #bbb;
   cursor: not-allowed;
 }
+
+.hover-effect {
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transform: scale(1.05);
+  }
+
+}

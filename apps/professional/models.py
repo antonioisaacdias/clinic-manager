@@ -37,3 +37,6 @@ class ModelProfessional(models.Model):
     def get_gender_display_label(self):
         return dict(self.GENDER_CHOICES).get(self.gender, 'Desconhecido')
     
+    def __str__(self):
+        return self.name
+    

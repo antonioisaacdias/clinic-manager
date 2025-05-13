@@ -1,8 +1,7 @@
 from django.urls import path
-from .views import ModelAppointmentListView, ModelAppointmentUpdateView
+from .views import professional_schedule_list
 
 urlpatterns = [
-    path('', ModelAppointmentListView.as_view(), name='appointment_today'),
-    path('<uuid:pk>/update/', ModelAppointmentUpdateView.as_view(), name='appointment_update'),
-    
+    # Schedule
+    path('schedule/', professional_schedule_list, name='schedule_list'),
 ]
