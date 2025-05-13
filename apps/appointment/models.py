@@ -44,7 +44,19 @@ class ModelSchedule(models.Model):
                     schedule=self,
                     datetime=slot,
                 )
-
+                
+    def generate_month_slots(self, dt):
+        current_date = dt
+        final_date = date(current_date.year, current_date.month + 1, 1) - timedelta(days=1)
+        
+        days = []
+        
+        while current_date <= final_date:
+            days.append(current_date)
+            current_date += timedelta(days=1)
+            
+        for day in days:
+            self.generate_day_slots(day)
         
         
     

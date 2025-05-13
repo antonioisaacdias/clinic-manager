@@ -8,5 +8,5 @@ from datetime import date
 def create_schedule_for_professional(sender, instance, created, **kwargs):
     if created:
         schedule = ModelSchedule.objects.create(professional=instance)
-        schedule.generate_day_slots(date.today())
+        schedule.generate_month_slots(date.today())
         print(f'Agenda criada: {schedule}')
