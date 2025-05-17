@@ -4,3 +4,4 @@ django-appconf==1.1.0
 fontawesomefree==6.6.0
 sqlparse==0.5.3
 typing_extensions==4.13.2
+
