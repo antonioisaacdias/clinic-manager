@@ -11,7 +11,6 @@ class ProfessionalViewSet(viewsets.ModelViewSet):
 
     queryset = Professional.objects.all()
     serializer_class = ProfessionalSerializer
-    permission_classes = [AllowAny]
     lookup_field = 'uuid'
 
     @action(detail=True, methods=['get', 'post', 'delete'], url_path='specialties')
@@ -67,6 +66,5 @@ class SpecialtyViewSet(viewsets.ModelViewSet):
 
     queryset = Specialty.objects.all()
     serializer_class = SpecialtySerializer
-    permission_classes = [AllowAny]
     lookup_field = 'uuid'
 
