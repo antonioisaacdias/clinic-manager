@@ -3,8 +3,15 @@ import uuid
 
 
 class Patient(models.Model):
+    gender_choices = [
+        ('M', 'Masculino'),
+        ('F', 'Feminino'),
+        ('O', 'Outro'),
+    ]
+
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
+    gender = models.CharField(max_length=1, choices=gender_choices)
     email = models.EmailField(unique=True)
     cpf = models.CharField(max_length=11, unique=True)
     phone = models.CharField(max_length=15, blank=True, null=True)
