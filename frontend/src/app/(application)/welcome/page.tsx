@@ -62,22 +62,6 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Botões de Ação */}
-      <div className="flex flex-col sm:flex-row gap-4 mt-8">
-        <Button asChild size="lg">
-          <Link href="/patients">
-            Ver Pacientes
-            <ArrowRight className="ml-2 w-4 h-4" />
-          </Link>
-        </Button>
-        
-        <Button asChild variant="outline" size="lg">
-          <Link href="/dashboard">
-            Dashboard
-          </Link>
-        </Button>
-      </div>
-
       {/* Mensagem de Rodapé */}
       <div className="mt-12 p-4 bg-blue-50 rounded-lg border border-blue-200 max-w-2xl">
         <p className="text-blue-800 text-sm">
