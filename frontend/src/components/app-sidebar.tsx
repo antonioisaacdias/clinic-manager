@@ -13,30 +13,25 @@ import {
   SidebarMenuItem,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { User, Users, Calendar, Home, LogOut } from "lucide-react"
+import { SquareChartGantt, ClipboardPlus, Stethoscope, LogOut } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 
 const menuItems = [
   {
-    title: "Dashboard",
-    icon: Home,
-    href: "/dashboard",
-  },
-  {
     title: "Profissionais",
-    icon: User,
+    icon: Stethoscope,
     href: "/professionals",
   },
   {
     title: "Pacientes",
-    icon: Users,
+    icon: ClipboardPlus,
     href: "/patients",
   },
   {
     title: "Administração",
-    icon: Calendar,
+    icon: SquareChartGantt,
     href: "/administration",
   },
 ]
@@ -64,7 +59,7 @@ export default function AppSidebar() {
           <h1 className="text-xl font-bold text-white group-data-[collapsible=icon]:hidden ms-3 leading-tight text-gray-50">
             Instituto Sarang
           </h1>
-          <SidebarTrigger className="ml-auto group-data-[collapsible=icon]:ml-0 text-gray-100 hover:text-gray-100 hover:bg-dark-teal-hover" />
+          <SidebarTrigger className="ml-auto group-data-[collapsible=icon]:ml-0 text-gray-100 hover:text-gray-100 hover:bg-dark-teal-hover p-2 flex items-center justify-center rounded-md min-w-8 min-h-8" />
         </div>
       </SidebarHeader>
       
@@ -105,7 +100,6 @@ export default function AppSidebar() {
       </SidebarContent>
       
       <SidebarFooter className="bg-dark-teal">
-        {/* ✅ BOTÃO SAIR NO FOOTER */}
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
@@ -117,18 +111,20 @@ export default function AppSidebar() {
                 hover:bg-dark-teal-hover
                 data-[active=true]:bg-dark-teal-hover
                 data-[active=true]:text-gray-100
+                h-12 px-4 my-2
+                flex items-center justify-center
+                text-base font-bold
               `}
               isActive={pathname === "/logout"}
             >
-              <Link href="/logout" className="text-gray-100">
-                <LogOut className="w-4 h-4" />
-                <span>Sair</span>
+              <Link href="/logout" className="text-gray-100 flex items-center justify-center gap-3 w-full group-data-[collapsible=icon]:justify-center">
+                <LogOut className="w-5 h-5" />
+                <span className="text-base font-bold group-data-[collapsible=icon]:hidden">Sair</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
         
-        {/* ✅ CRÉDITOS ABAIXO DO BOTÃO SAIR */}
         <div className="p-4 flex flex-col items-center">
           <p className="text-xs text-sidebar-foreground/60 group-data-[collapsible=icon]:hidden text-gray-300">
             Made with ♥ by <span className="font-semibold">Antonio Dias</span>
