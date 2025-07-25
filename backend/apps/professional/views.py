@@ -1,17 +1,29 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
 from rest_framework.decorators import action
 from .models import Professional, Specialty
 from django.shortcuts import get_object_or_404
-
 from .serializers import ProfessionalSerializer, SpecialtySerializer
 
 class ProfessionalViewSet(viewsets.ModelViewSet):
-
     queryset = Professional.objects.all()
     serializer_class = ProfessionalSerializer
     lookup_field = 'uuid'
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        # Use o serializer para garantir o tratamento correto da foto
+        serializer = self.get_serializer(queryset, many=True, context={'request': request})
+        # Agora, customize para retornar apenas as informações desejadas
+        data = []
+        for item in serializer.data:
+            data.append({
+                'uuid': item['uuid'],
+                'name': item['name'],
+                'specialties': [s['name'] if isinstance(s, dict) else s for s in item.get('specialties', [])],
+                'photo': item['photo'],
+            })
+        return Response(data)
 
     @action(detail=True, methods=['get', 'post', 'delete'], url_path='specialties')
     def manage_specialties(self, request, uuid=None):
