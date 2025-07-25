@@ -18,41 +18,55 @@ export default function ProtectedRoute({
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
+  // Evitar problemas de hidratação
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Redirecionar se não estiver autenticado
   useEffect(() => {
     if (mounted && !isLoading && !isAuthenticated) {
+      console.log('🔓 Usuário não autenticado, redirecionando para:', redirectTo);
       router.push(redirectTo);
     }
   }, [isAuthenticated, isLoading, router, redirectTo, mounted]);
 
+  // Loading centralizado enquanto não monta
   if (!mounted) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <Loader2 className="h-8 w-8 animate-spin" />
+      <div className="fixed inset-0 flex items-center justify-center bg-white">
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="h-8 w-8 animate-spin text-dark-teal" />
+          <span className="text-sm text-gray-600">Carregando aplicação...</span>
+        </div>
       </div>
     );
   }
 
+  // Loading centralizado enquanto verifica autenticação
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <Loader2 className="h-8 w-8 animate-spin" />
-        <span className="ml-2">Verificando autenticação...</span>
+      <div className="fixed inset-0 flex items-center justify-center bg-white">
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="h-8 w-8 animate-spin text-dark-teal" />
+          <span className="text-sm text-gray-600">Verificando autenticação...</span>
+        </div>
       </div>
     );
   }
 
+  // Se não estiver autenticado, mostrar loading de redirecionamento
   if (!isAuthenticated) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <Loader2 className="h-8 w-8 animate-spin" />
-        <span className="ml-2">Redirecionando...</span>
+      <div className="fixed inset-0 flex items-center justify-center bg-white">
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="h-8 w-8 animate-spin text-red-500" />
+          <span className="text-sm text-gray-600">Redirecionando para login...</span>
+        </div>
       </div>
     );
   }
 
+  // Se estiver autenticado, renderizar o conteúdo
   return <>{children}</>;
 }
