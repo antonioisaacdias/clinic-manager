@@ -9,9 +9,14 @@
 }
 
 
-
 @layer base {
   :root {
+
+    --dark-teal: 174 61% 28%; /* ← MUDANÇA AQUI: HSL em vez de HEX */
+    --dark-teal-hover: 174 61% 28% / 0.8; /* ← MUDANÇA AQUI TAMBÉM: HSL em vez de HEX */
+    --dark-teal-active: 174 61% 28% / 0.6; /* ← MUDANÇA AQUI TAMBÉM: HSL em vez de HEX */
+    --dark-teal-focus: 174 61% 28% / 0.5; /* ← MUDANÇA AQUI TAMBÉM: HSL em vez de HEX */
+
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -30,7 +35,7 @@
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    --ring: var(--dark-teal-active); /* ← MUDANÇA AQUI: HSL em vez de HEX */
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -46,6 +51,7 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+  
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -65,7 +71,7 @@
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --ring: 174 61% 28%; /* ← MUDANÇA AQUI TAMBÉM */
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;

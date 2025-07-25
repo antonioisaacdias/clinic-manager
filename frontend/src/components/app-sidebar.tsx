@@ -13,7 +13,7 @@ import {
   SidebarMenuItem,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { User, Users, Calendar, Home } from "lucide-react"
+import { User, Users, Calendar, Home, LogOut } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
@@ -48,7 +48,7 @@ export default function AppSidebar() {
     <Sidebar 
       collapsible="icon"
       style={{
-        '--sidebar-accent': '#267474',        // dark-teal-hover
+        '--sidebar-accent': '#267474',
         '--sidebar-accent-foreground': '#ffffff',
       } as React.CSSProperties}
     >
@@ -105,6 +105,30 @@ export default function AppSidebar() {
       </SidebarContent>
       
       <SidebarFooter className="bg-dark-teal">
+        {/* ✅ BOTÃO SAIR NO FOOTER */}
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              asChild
+              tooltip="Sair"
+              className={`
+                text-gray-100 
+                hover:text-gray-100 
+                hover:bg-dark-teal-hover
+                data-[active=true]:bg-dark-teal-hover
+                data-[active=true]:text-gray-100
+              `}
+              isActive={pathname === "/logout"}
+            >
+              <Link href="/logout" className="text-gray-100">
+                <LogOut className="w-4 h-4" />
+                <span>Sair</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+        
+        {/* ✅ CRÉDITOS ABAIXO DO BOTÃO SAIR */}
         <div className="p-4 flex flex-col items-center">
           <p className="text-xs text-sidebar-foreground/60 group-data-[collapsible=icon]:hidden text-gray-300">
             Made with ♥ by <span className="font-semibold">Antonio Dias</span>
