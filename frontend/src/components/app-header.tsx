@@ -23,7 +23,7 @@ export default function AppHeader({
   title, 
   subtitle,
   actions,
-  hideOnPages = ['/']
+  hideOnPages = ['/', '/welcome']
 }: AppHeaderProps) {
   const pathname = usePathname();
   
@@ -37,7 +37,6 @@ export default function AppHeader({
 
   return (
     <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 bg-white">
-      <SidebarTrigger className="-ml-1" />
       
       <div className="flex-1 flex items-center justify-between">
         {/* Título e Subtítulo */}
