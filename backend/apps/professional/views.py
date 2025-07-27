@@ -86,10 +86,13 @@ class SpecialtyViewSet(viewsets.ModelViewSet):
     pagination_class = CustomPagination  # Adicione esta linha
 
     def get_queryset(self):
-        queryset = Specialty.objects.all()
+        queryset = Specialty.objects.all().order_by('-is_active', 'name')
         search = self.request.query_params.get('search')
         if search:
             queryset = queryset.filter(name__icontains=search)
+        is_active = self.request.query_params.get('is_active')
+        if is_active is not None:
+            queryset = queryset.filter(is_active=is_active.lower() == "true")
         return queryset
 
     def list(self, request, *args, **kwargs):
