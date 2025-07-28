@@ -6,16 +6,44 @@ from django.shortcuts import get_object_or_404
 from .serializers import ProfessionalSerializer, SpecialtySerializer
 from rest_framework.pagination import PageNumberPagination
 
+class CustomPagination(PageNumberPagination):
+    page_size_query_param = 'page_size'
+    max_page_size = 100  # limite máximo opcional
+
 class ProfessionalViewSet(viewsets.ModelViewSet):
     queryset = Professional.objects.all()
     serializer_class = ProfessionalSerializer
     lookup_field = 'uuid'
+    pagination_class = CustomPagination  # Adicione esta linha
+
+    def get_queryset(self):
+        queryset = Professional.objects.all().order_by('-is_active', 'name')
+        search = self.request.query_params.get('search')
+        if search:
+            queryset = queryset.filter(name__icontains=search)
+        is_active = self.request.query_params.get('is_active')
+        if is_active is not None:
+            queryset = queryset.filter(is_active=is_active.lower() == "true")
+        return queryset
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        # Use o serializer para garantir o tratamento correto da foto
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True, context={'request': request})
+            # Personalize os dados se quiser, igual ao Specialty
+            data = []
+            for item in serializer.data:
+                data.append({
+                    'uuid': item['uuid'],
+                    'name': item['name'],
+                    'specialties': [s['name'] if isinstance(s, dict) else s for s in item.get('specialties', [])],
+                    'gender': item.get('gender'),  # <-- aqui!
+                    'photo': item.get('photo'),
+                    'is_active': item.get('is_active', True),
+                })
+            return self.get_paginated_response(data)
         serializer = self.get_serializer(queryset, many=True, context={'request': request})
-        # Agora, customize para retornar apenas as informações desejadas
         data = []
         for item in serializer.data:
             data.append({
@@ -23,6 +51,7 @@ class ProfessionalViewSet(viewsets.ModelViewSet):
                 'name': item['name'],
                 'specialties': [s['name'] if isinstance(s, dict) else s for s in item.get('specialties', [])],
                 'photo': item['photo'],
+                'is_active': item.get('is_active', True),
             })
         return Response(data)
 
@@ -74,10 +103,6 @@ class ProfessionalViewSet(viewsets.ModelViewSet):
 
             professional.remove_specialty(specialty)
             return Response(status=status.HTTP_204_NO_CONTENT)
-
-class CustomPagination(PageNumberPagination):
-    page_size_query_param = 'page_size'
-    max_page_size = 100  # limite máximo opcional
 
 class SpecialtyViewSet(viewsets.ModelViewSet):
     queryset = Specialty.objects.all()
